@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <app-add-todos></app-add-todos>
+  </div>
+  <div *ngFor="let todo of todos; index as i">
+    <app-todo-items [todo]="todo" [i]="i"> </app-todo-items>
+  </div>
+</div>

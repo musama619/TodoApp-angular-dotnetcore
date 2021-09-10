@@ -24,10 +24,9 @@ namespace API.Models
 
         public byte[] PasswordSalt { get; set; }
 
-        [Required]
+        
         public DateTime DateOfBirth { get; set; }
 
-        [Required]
         public string Gender { get; set; }
 
     }
