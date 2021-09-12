@@ -22,16 +22,38 @@ export class AddTodosComponent implements OnInit {
     this.addTodoForm = new FormGroup({
       title: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
-      date: new FormControl(null, Validators.required)
-      
+      date: new FormControl(null, Validators.required),
+      addedByUserName: new FormControl(null, Validators.required),
+      status: new FormControl(null, Validators.required)
     })
+
+    
   }
 
   onSubmit() {
+
+    var x = localStorage.getItem('token');
+    if (x) {
+      var allx = JSON.parse(x);
+    
+    }
+
     console.log("Value: "+this.addTodoForm.value)
+
+    this.addTodoForm.controls['addedByUserName'].setValue(allx.username);
+    this.addTodoForm.controls['status'].setValue(true);
+
+  //   this.addTodoForm.patchValue({
+  //     status: 'true'
+  //  });
+    // this.addTodoForm.controls['status'].setValue('true');
+
+    console.log("After Patch: "+ JSON.stringify(this.addTodoForm.value));
+
     this.todoService.addTodo(this.addTodoForm.value).subscribe(response => {    
       console.log("Todo Added: " + response);
       
+
     })
   }
 

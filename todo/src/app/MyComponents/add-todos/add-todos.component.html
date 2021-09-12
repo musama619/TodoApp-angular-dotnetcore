@@ -70,6 +70,39 @@
           </mat-form-field>
         </div>
   
+        <div class="mb-3" style="display: none;">
+          <mat-form-field appearance="outline" [color]="'warn'">
+            <mat-label>Added By</mat-label>
+            <textarea
+              matInput
+              id="addedByUserName"
+              name="addedByUserName"
+              autocomplete="off"
+              maxlength="150"
+              formControlName="addedByUserName"
+            ></textarea>
+            <mat-hint align="end"></mat-hint>
+  
+          </mat-form-field>
+  
+        </div>
+
+        <div class="mb-3" style="display: none;">
+          <mat-form-field appearance="outline" [color]="'warn'">
+            <mat-label>Status</mat-label>
+            <textarea
+              matInput
+              id="status"
+              name="status"
+              autocomplete="off"
+              maxlength="150"
+              formControlName="status"
+            ></textarea>
+  
+          </mat-form-field>
+  
+        </div>
+
         <div class="d-flex justify-content-center">
           <button type="submit" class="btn btn-success" [disabled]="!addTodoForm.get('title').valid" mat-raised-button color="warn">
             Add Todo
@@ -79,7 +112,7 @@
           </button>
         </div>
         <br/>
-        <p>{{ addTodoForm.value | json }}</p>
+        <!-- <p>{{ addTodoForm.value | json }}</p> -->
       </form>
     </mat-card>
   </div>

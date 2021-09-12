@@ -12,28 +12,27 @@ export class TodoService {
 
   constructor(private http: HttpClient) {}
 
-  // showAllTodos(){
-  //   return this.http.get(this.baseUrl + 'todos').pipe(
-  //     map((user: any) => {
-  //       if (user) {
-  //         console.log('Showing user: ' + JSON.stringify(user));
-  //       }
-
-  //       return user;
-  //     })
-  //   );
-
-  //}
-
-  showAllTodos(){
+  showAllTodos() {
     return this.http.get<Todo[]>(this.baseUrl + 'todos');
-
   }
 
+  showTodoByUser(model: any){
+    console.log("Username received: " + model)
+    console.log(this.baseUrl + 'todos/ByUser/' + model)
+    return this.http.get<Todo[]>(this.baseUrl + 'todos/ByUser/' + model)
+  }
 
- 
-
-  addTodo(model: any){
+  addTodo(model: any) {
     return this.http.post(this.baseUrl + 'todos', model);
+  }
+
+  updateTodo(model: any){
+    console.log(this.baseUrl + 'todos/' + model.todoid, model.Todo)
+    return this.http.put(this.baseUrl + 'todos/' + model.todoid, model.Todo);
+  }
+
+  deleteTodo(model: number) {
+    console.log("Inside delete: " + model)
+    return this.http.delete(this.baseUrl + 'todos/' + model);
   }
 }

@@ -3,6 +3,7 @@
     <app-add-todos></app-add-todos>
   </div>
   <div *ngFor="let todo of todos; index as i">
-    <app-todo-items [todo]="todo" [i]="i"> </app-todo-items>
+    <app-todo-items [todo]="todo" [i]="i" (todoCheckbox)="strikeTodo($event)">
+    </app-todo-items>
   </div>
 </div>

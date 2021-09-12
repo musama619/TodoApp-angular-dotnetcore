@@ -10,7 +10,7 @@ namespace API.Models
     {
         public int Id { get; set; }
 
-        public int AddedByUserId { get; set; }
+        public string AddedByUserName { get; set; }
 
         public string Title { get; set; }
 

@@ -42,6 +42,32 @@ namespace API.Controllers
             return todo;
         }
 
+        [HttpGet("ByUser/{userName}")]
+        public List<Todo> GetTodoByUserName(string userName)
+        {
+            List<Todo> tod = _context.Todos.Where(s => s.AddedByUserName == userName).ToList();
+
+
+            return tod;
+            //return await (from p in _context.Todos
+
+            //              where p.AddedByUserName == userName
+            //             ).ToListAsync();
+
+
+            //var todo = await _context.Todos.Where(x => x.AddedByUserName == userName).ToListAsync();
+
+            ////var user = await _context.Users.Where(x => x.UserName == userName).ToListAsync();
+
+            //if (todo == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //return todo;
+            //return _context.user;
+        }
+
         // PUT: api/Todos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

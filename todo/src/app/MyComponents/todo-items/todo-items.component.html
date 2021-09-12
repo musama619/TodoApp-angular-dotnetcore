@@ -1,10 +1,99 @@
-<div class="card">
-    <h5 class="card-header">{{ todo.title }}</h5>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">{{todo.description}}</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+
+<div class="card mb-3 shadow rounded">
+  <div class="card-header">
+    {{ todo.title }}
+    <div class="float-end">
+      <a
+        type="button"
+        (click)="deleteTodo(todo)"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="Delete todo"
+        ><i class="fa fa-trash fa-lg text-danger"></i
+      ></a>
     </div>
   </div>
 
-  <h1>Hi  {{ todo.description }}</h1>
+  <a>
+    <div class="card-body">
+      <p
+        [ngClass]="{
+          'text-decoration': todo.status,
+          'text-decoration-line-through': !todo.status
+        }"
+        class="card-text"
+      >
+        {{ todo.description }}
+      </p>
+      <p
+        [ngClass]="{
+          'text-decoration': todo.status,
+          'text-decoration-line-through': !todo.status
+        }"
+      >
+        {{ todo.date }}
+      </p>
+    </div>
+  </a>
+  <div class="card-footer text-muted">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-xl-6 col-sm-12">
+        <mat-checkbox
+          class="example-margin"
+          id="activeq{{ i }}"
+          color="primary"
+          [checked]="todo.status"
+          (change)="markAsDone(todo, $event.checked)"
+
+          
+          >Mark as done</mat-checkbox
+        >
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-xl-6 col-sm-12">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm rounded float-end"
+          [hidden]="!this.todo.status"
+        >
+          <i class="fa fa-edit"></i>
+          Edit
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary btn-sm rounded float-end"
+          [hidden]="this.todo.status"
+        >
+          <i class="fa fa-eye"></i>
+          View
+        </button>
+        <button
+          class="fa fa-circle btn rounded float-end"
+          id="success{{ i }}"
+          style="color: green"
+        ></button>
+        <button
+          class="fa fa-circle btn rounded float-end"
+          id="primary{{ i }}"
+          style="color: blue"
+        ></button>
+        <button
+          class="fa fa-circle btn rounded float-end"
+          id="warning{{ i }}"
+          style="color: yellow"
+        ></button>
+        <button
+          class="fa fa-circle btn rounded float-end"
+          id="info{{ i }}"
+          style="color: turquoise"
+        ></button>
+        <button
+          class="fa fa-circle btn rounded float-end"
+          id="light{{ i }}"
+          style="color: gainsboro"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>

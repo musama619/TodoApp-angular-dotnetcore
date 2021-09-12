@@ -21,6 +21,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import { TodoItemsComponent } from './MyComponents/todo-items/todo-items.component';
+import { ToastrModule } from 'ngx-toastr';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,10 @@ import { TodoItemsComponent } from './MyComponents/todo-items/todo-items.compone
     MatDatepickerModule,
     MatButtonModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    ToastrModule.forRoot(),
+    MatCheckboxModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,32 +10,40 @@ import { Observable } from 'rxjs/internal/Observable';
   styleUrls: ['./your-todos.component.css'],
 })
 export class YourTodosComponent implements OnInit {
-  courses$: Observable<Todo[]>;
-
   constructor(private todoService: TodoService) {}
 
   todos = [];
 
   ngOnInit() {
-    this.todoService.showAllTodos().subscribe(
-      response => {
-        console.log("Raw: " + response);
-        this.todos = response;
+    console.log('inside You todosa: ');
+    var x = localStorage.getItem('token');
+    if (x) {
+      var allx = JSON.parse(x);
+    }
+
+    this.todoService.showTodoByUser(allx.username).subscribe((response) => {
+      console.log('String: ' + JSON.stringify(response));
+      console.log('Raw: ' + response);
+      this.todos = Object.assign(response);
+    });
+  }
+
+  strikeTodo(todo) {
+
+    console.log("event: " + JSON.stringify(todo))
+    
+
+    this.todoService.updateTodo(todo).subscribe(
+      (response) => {
+        console.log('The response' + JSON.stringify(response));
+      },
+      (error) => {
+        console.log('Error: ' + error);
       }
-    )
-
-    // this.todoService
-    //   .showAllTodos()
-    //   .toPromise()
-    //   .then((data) => {
-    //     console.log('new' + data);
-    //     for (let key in data) {
-    //       if (data.hasOwnProperty(key)) {
-    //         this.todos.push(data[key]);
-    //       }
-    //     }
-
-    //     console.log('Array: ' + this.todos);
-    //   });
+    );
   }
 }
+
+
+//(change)="markAsDone($event.checked)"
+
