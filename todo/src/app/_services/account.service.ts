@@ -23,4 +23,22 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account/login', model);
     
   }
+
+  getToken(){
+    console.log("inside Get Token")
+
+    var token = localStorage.getItem('token');
+    console.log(token);
+
+    
+    if (token != null) {
+      var token_n = JSON.parse(token);
+      return token_n.token
+    }
+    else{
+      console.log("Empty token")
+    }
+    
+
+  }
 }

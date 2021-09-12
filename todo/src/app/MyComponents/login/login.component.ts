@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         console.log('login Success' + response);
         localStorage.setItem('token', JSON.stringify(response));
 
-        this.getUserInformation();
+        // this.getUserInformation();
 
         this.router.navigate(['/your-todos']);
         this.toastr.success('Login Successful');
@@ -45,15 +45,15 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  getUserInformation() {
-    var x = localStorage.getItem('token');
-    if (x) {
-      var allx = JSON.parse(x);
+  // getUserInformation() {
+  //   var x = localStorage.getItem('token');
+  //   if (x) {
+  //     var allx = JSON.parse(x);
     
-    }
-    this.userService.getUserId(allx.username).subscribe(response =>{
-      console.log(response);
+  //   }
+  //   this.userService.getUserId(allx.username).subscribe(response =>{
+  //     console.log(response);
       
-    }, error => {console.log("error" + error)})
-  }
+  //   }, error => {console.log("error" + error)})
+  // }
 }

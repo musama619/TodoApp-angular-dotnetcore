@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Data;
 using API.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -42,6 +43,7 @@ namespace API.Controllers
             return todo;
         }
 
+        [Authorize]
         [HttpGet("ByUser/{userName}")]
         public List<Todo> GetTodoByUserName(string userName)
         {

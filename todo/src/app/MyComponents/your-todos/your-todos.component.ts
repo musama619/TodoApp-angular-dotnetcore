@@ -22,8 +22,8 @@ export class YourTodosComponent implements OnInit {
     }
 
     this.todoService.showTodoByUser(allx.username).subscribe((response) => {
-      console.log('String: ' + JSON.stringify(response));
-      console.log('Raw: ' + response);
+      // console.log('String: ' + JSON.stringify(response));
+      // console.log('Raw: ' + response);
       this.todos = Object.assign(response);
     });
   }

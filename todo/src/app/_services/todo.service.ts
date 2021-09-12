@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
@@ -17,7 +17,19 @@ export class TodoService {
   }
 
   showTodoByUser(model: any){
-    console.log("Username received: " + model)
+
+    var token = localStorage.getItem('token');
+    let headers: HttpHeaders = new HttpHeaders();
+
+    if (token) {
+      var token_n = JSON.parse(token);
+    }
+
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    headers.append('Authorization', token_n.token);
+    
+    console.log("Token: " + JSON.stringify(token_n.token))
+    console.log("Header: " + JSON.stringify(headers))
     console.log(this.baseUrl + 'todos/ByUser/' + model)
     return this.http.get<Todo[]>(this.baseUrl + 'todos/ByUser/' + model)
   }
