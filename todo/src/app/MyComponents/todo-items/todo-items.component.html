@@ -43,6 +43,7 @@
           id="activeq{{ i }}"
           color="primary"
           [checked]="todo.status"
+          value="todo.status"
           (change)="markAsDone(todo, $event.checked)"
 
           
