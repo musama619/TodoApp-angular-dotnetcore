@@ -10,6 +10,10 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
+  getEmployees(){
+    return this.http.get(this.baseUrl)
+  }
+
   getCities(){
     return this.http.get(this.baseUrl + 'getCities')
   }
@@ -32,5 +36,9 @@ export class EmployeeService {
 
   addEmployee(employee: any){
     return this.http.post(this.baseUrl, employee)
+  }
+
+  deleteEmployee(employeeId: number){
+    return this.http.delete(this.baseUrl + employeeId);
   }
 }

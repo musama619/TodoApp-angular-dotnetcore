@@ -12,23 +12,17 @@ export class AccountService {
   constructor(private http: HttpClient) {}
 
   register(model: any) {
-    console.log("inside register")
-    console.log(model)
     return this.http.post(this.baseUrl + 'account/register', model);
   }
 
   login(model: any) {
-    console.log("inside login")
-    console.log(model)
     return this.http.post(this.baseUrl + 'account/login', model);
     
   }
 
   getToken(){
-    console.log("inside Get Token")
 
     var token = localStorage.getItem('token');
-    console.log(token);
 
     
     if (token != null) {

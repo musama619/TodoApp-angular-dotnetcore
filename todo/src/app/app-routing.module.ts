@@ -6,14 +6,15 @@ import { HomeComponent } from './MyComponents/home/home.component';
 import { LoginComponent } from './MyComponents/login/login.component';
 import { RegisterComponent } from './MyComponents/register/register.component';
 import { YourTodosComponent } from './MyComponents/your-todos/your-todos.component';
+import { AuthGuardService } from './_services/auth-guard.service';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'your-todos', component: YourTodosComponent},
-  {path: 'employee-setup', component: EmployeeSetupComponent},
-  {path: 'employee-details', component: EmployeeDetailsComponent},
+  {path: 'employee-setup', component: EmployeeSetupComponent, canActivate: [AuthGuardService]},
+  {path: 'employee-details', component: EmployeeDetailsComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({

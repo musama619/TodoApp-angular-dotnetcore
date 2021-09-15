@@ -32,6 +32,8 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { EmployeeSetupComponent } from './MyComponents/employee-setup/employee-setup.component';
 import { EmployeeDetailsComponent } from './MyComponents/employee-details/employee-details.component';
+import { DetailModalComponent } from './MyComponents/employee-details/detail-modal/detail-modal.component';
+
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { EmployeeDetailsComponent } from './MyComponents/employee-details/employ
     TodoItemsComponent,
     EmployeeSetupComponent,
     EmployeeDetailsComponent,
+    DetailModalComponent,
   ],
   imports: [
     BrowserModule,

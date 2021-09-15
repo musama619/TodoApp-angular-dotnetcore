@@ -54,9 +54,12 @@ namespace API.Controllers
 
         // GET: api/Employees
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        public ActionResult<IEnumerable<EmployeeDetails>> GetEmployees()
         {
-            return await _context.Employees.ToListAsync();
+            return _context.EmployeeDetails.FromSqlRaw("GetEmployeesData").ToList();
+
+            //return await _context.Employees.ToListAsync();
+            //return x;
         }
 
         // GET: api/Employees/5

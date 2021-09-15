@@ -53,7 +53,7 @@ export class EmployeeSetupComponent implements OnInit {
 
     this.empService.addEmployee(this.employeeForm.value).subscribe(response => {
       if (response) {
-        this.toastr.success('Login Successful');
+        this.toastr.success('Employee Added Successfully');
       }
     }, error => {
       console.log(error)

@@ -1,0 +1,74 @@
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>
+          <strong></strong>
+        </h3>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <mat-form-field appearance="outline" [color]="'warn'">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            id="todoDescription"
+            name="description"
+            placeholder="Enter todo description"
+            autocomplete="off"
+            maxlength="150"
+          ></textarea>
+          <mat-hint align="end">150</mat-hint>
+        </mat-form-field>
+        <br />
+
+        <div class="row">
+          <div class="col-12">
+            <div class="">
+              <mat-form-field appearance="fill" [color]="'warn'">
+                <mat-label>Choose a date</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  autocomplete="off"
+                  readonly
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="mx-1"
+          data-bs-dismiss="modal"
+          mat-raised-button
+          color="light"
+        >
+          Close
+        </button>
+        <button type="button" class="mx-1" mat-raised-button color="warn">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

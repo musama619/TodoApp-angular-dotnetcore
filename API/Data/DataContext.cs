@@ -9,6 +9,7 @@ namespace API.Data
 {
     public class DataContext : DbContext
     {
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
@@ -21,9 +22,11 @@ namespace API.Data
         public DbSet<Department> Departments { get; set; }
         public DbSet<Designation> Designations { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeDetails> EmployeeDetails { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Qualification> Qualifications { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Models.Type> Types { get; set; }
+
     }
 }
