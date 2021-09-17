@@ -10,9 +10,20 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
+  savedData: any;
   getUserId(model: any){
     console.log("Inside user:")
     console.log(this.baseUrl + '/users/ByUser/' + model)
     return this.http.get(this.baseUrl + 'users/ByUser/' + model)
+  }
+  
+  
+  passEditeEmployeeData(model: any){
+    this.savedData = model;
+
+  }
+
+  getEditEmployee(){
+    return this.savedData;
   }
 }

@@ -14,8 +14,8 @@
         <div class="col-md-6">
           <mat-form-field appearance="standard">
             <mat-label>Department</mat-label>
-            <mat-select formControlName="departmentCode">
-              <mat-option *ngFor="let dept of departments" [value]="dept.id"> {{ dept.departmentName }}  </mat-option>
+            <mat-select formControlName="departmentCode" [(value)]="data.departmentName"> 
+              <mat-option *ngFor="let dept of departments" [value]="dept.id" > {{ dept.departmentName }}  </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
