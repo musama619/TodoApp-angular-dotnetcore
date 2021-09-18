@@ -18,94 +18,84 @@ export class EmployeeSetupComponent implements OnInit {
   departments: any;
   designations: any;
 
+  setValue = 5;
   data: any;
+
+  genderValue: any;
+  typeValue: any;
+  deptValue: any;
 
   constructor(
     private empService: EmployeeService,
     private toastr: ToastrService,
     private userService: UserService
-  ) 
-  
-  {
-    
-  }
-
-  ngOnInit() {
-
-    this.data = this.userService.getEditEmployee();
-
-    console.log('Emit: ' + this.data);
-
-    if (this.data) {
-      console.log(this.data);
-      this.employeeForm = this.getForm(this.data);
-
-    } else {
-      this.employeeForm = this.getForm();
-    }
-
-    // this.employeeForm = new FormGroup({
-    //   employeeName: new FormControl(null, Validators.required),
-    //   email: new FormControl(null, [Validators.required, Validators.email]),
-    //   departmentCode: new FormControl(this.departments),
-    //   designationCode: new FormControl(this.designations),
-    //   address: new FormControl(null, Validators.required),
-    //   doj: new FormControl(null, Validators.required),
-    //   dob: new FormControl(null, Validators.required),
-    //   qualificationCode: new FormControl(this.qualifications),
-    //   stateCode: new FormControl(this.states),
-    //   cityCode: new FormControl(this.cities),
-    //   phoneNumber: new FormControl(null, Validators.required),
-    //   genderCode: new FormControl(null, Validators.required),
-    //   typeCode: new FormControl(null),
-    // });
-
+  ) {
     this.setCities();
     this.setStates();
     this.setQualifications();
     this.setDepartments();
     this.setDesignations();
+
+    this.employeeForm = new FormGroup({
+      employeeName: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      departmentCode: new FormControl(this.departments),
+      designationCode: new FormControl(this.designations),
+      address: new FormControl(null, Validators.required),
+      doj: new FormControl(null, Validators.required),
+      dob: new FormControl(null, Validators.required),
+      qualificationCode: new FormControl(this.qualifications),
+      stateCode: new FormControl(this.states),
+      cityCode: new FormControl(this.cities),
+      phoneNumber: new FormControl(null, Validators.required),
+      genderCode: new FormControl(null, Validators.required),
+      typeCode: new FormControl(null),
+    });
   }
 
-  getForm(data: any = null): FormGroup {
+  ngOnInit() {
 
-    data = data || {
-      
-      employeeName: null,
-      email: null,
-      departmentCode: null,
-      designationCode: this.designations,
-      address: null,
-      doj: null,
-      dob: null,
-      qualificationCode: this.qualifications,
-      stateCode: this.states,
-      cityCode: this.cities,
-      phoneNumber: null,
-      genderCode: null,
-      typeCode: null,
-    };
+    this.data = this.userService.getEditEmployee();
+    console.log(this.data)
+    if (this.data) {
+      this.setFormValues(this.data);
+    }
 
-    return new FormGroup({
-      employeeName: new FormControl(data.employeeName, Validators.required),
-      email: new FormControl(data.email, [
-        Validators.required,
-        Validators.email,
-      ]),
+  }
 
-      departmentCode: new FormControl(data.departmentName),
-      designationCode: new FormControl(data.designationName),
-      address: new FormControl(data.address, Validators.required),
-      doj: new FormControl(data.doj, Validators.required),
-      dob: new FormControl(data.dob, Validators.required),
-      qualificationCode: new FormControl(data.qualificationName),
-      stateCode: new FormControl(data.stateName),
-      cityCode: new FormControl(data.cityName),
-      phoneNumber: new FormControl(data.phoneNumber, Validators.required),
-      genderCode: new FormControl(data.genderCode, Validators.required),
-      typeCode: new FormControl(data.typeName),
-    });
+  setFormValues(data: any){
+    this.employeeForm.setValue({
+      employeeName: data.employeeName,
+      email: data.email,
+      departmentCode: data.departmentName,
+      designationCode: data.designationName,
+      address: data.address,
+      doj: data.doj,
+      dob:data.dob,
+      qualificationCode: data.qualificationName,
+      stateCode: data.stateName,
+      cityCode: data.cityName,
+      phoneNumber: data.phoneNumber,
+      genderCode: data.genderName,
+      typeCode: data.typeName,
+    })
 
+    if (data.genderName == 'Male') {
+      this.genderValue = "1";
+    }
+    else{
+      this.genderValue = "2";
+    }
+
+    if (data.typeName == 'Permenant') {
+      this.typeValue = "1";
+    }
+    else{
+      this.typeValue = "2";
+    }
+
+    this.deptValue = data.departmentName;
+    
   }
 
   submit() {

@@ -14,7 +14,7 @@
         <div class="col-md-6">
           <mat-form-field appearance="standard">
             <mat-label>Department</mat-label>
-            <mat-select formControlName="departmentCode" [(value)]="data.departmentName"> 
+            <mat-select formControlName="departmentCode" [formControl]="deptValue"> 
               <mat-option *ngFor="let dept of departments" [value]="dept.id" > {{ dept.departmentName }}  </mat-option>
             </mat-select>
           </mat-form-field>
@@ -139,6 +139,7 @@
                   type="radio"
                   id="inlineCheckbox1"
                   value="1"
+                  [ngModel]="genderValue"
                   name="genderCode"
                   formControlName="genderCode"
                 />
@@ -153,6 +154,7 @@
                   id="inlineCheckbox2"
                   name="genderCode"
                   value="2"
+                  [ngModel]="genderValue"
                   formControlName="genderCode"
                 />
                 <label class="form-check-label" for="inlineCheckbox2"
@@ -174,6 +176,7 @@
                   id="inlineCheckbox1"
                   value="1"
                   name="typeCode"
+                  [ngModel]="typeValue"
                   formControlName="typeCode"
                 />
                 <label class="form-check-label" for="inlineCheckbox1"
@@ -187,6 +190,7 @@
                   id="inlineCheckbox2"
                   name="typeCode"
                   value="2"
+                  [ngModel]="typeValue"
                   formControlName="typeCode"
                 />
                 <label class="form-check-label" for="inlineCheckbox2"
