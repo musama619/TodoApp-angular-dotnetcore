@@ -10,7 +10,7 @@ export class DetailModalComponent implements OnInit {
 
   constructor() { }
 
-  @Input() data: Employee;
+  @Input() data: any;
 
   ngOnInit(): void {
     console.log( "Modal: " + JSON.stringify(this.data))

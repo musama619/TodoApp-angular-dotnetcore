@@ -14,7 +14,7 @@
         <div class="col-md-6">
           <mat-form-field appearance="standard">
             <mat-label>Department</mat-label>
-            <mat-select formControlName="departmentCode" [formControl]="deptValue"> 
+            <mat-select formControlName="departmentCode"> 
               <mat-option *ngFor="let dept of departments" [value]="dept.id" > {{ dept.departmentName }}  </mat-option>
             </mat-select>
           </mat-form-field>
@@ -138,7 +138,7 @@
                   class="form-check-input"
                   type="radio"
                   id="inlineCheckbox1"
-                  value="1"
+                  [value]="1"
                   [ngModel]="genderValue"
                   name="genderCode"
                   formControlName="genderCode"
@@ -153,7 +153,7 @@
                   type="radio"
                   id="inlineCheckbox2"
                   name="genderCode"
-                  value="2"
+                  [value]="2"
                   [ngModel]="genderValue"
                   formControlName="genderCode"
                 />
@@ -174,7 +174,7 @@
                   class="form-check-input"
                   type="radio"
                   id="inlineCheckbox1"
-                  value="1"
+                  [value]="1"
                   name="typeCode"
                   [ngModel]="typeValue"
                   formControlName="typeCode"
@@ -189,7 +189,7 @@
                   type="radio"
                   id="inlineCheckbox2"
                   name="typeCode"
-                  value="2"
+                  [value]="2"
                   [ngModel]="typeValue"
                   formControlName="typeCode"
                 />
@@ -197,16 +197,34 @@
                   >Probation</label
                 >
               </div>
+              <div class="form-check" hidden="true">
+                <input
+                  class="form-check-input"
+                  type="text"
+                  formControlName="status"
+                />
+                
+              </div>
+              <div class="form-check" hidden="true">
+                <input
+                  class="form-check-input"
+                  type="text"
+                  formControlName="id"
+                />
+                
+              </div>
             </div>
           </div>
         </div>
 
         <div class="col-12">
-          <button type="submit" class="btn btn-primary" style="float: right">
+          <button type="submit" class="btn btn-primary" style="float: right" *ngIf="!data">
             Submit
           </button>
+          <button type="button" class="btn btn-warning" style="float: right" *ngIf="data" (click)="updateEmployee()">
+            Update
+          </button>
         </div>
-        <p>FormValue: {{ employeeForm.value | json }}</p>
       </form>
     </div>
   </div>

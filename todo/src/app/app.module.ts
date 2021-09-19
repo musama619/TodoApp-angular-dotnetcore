@@ -29,11 +29,13 @@ import { TodoService } from './_services/todo.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 import { EmployeeSetupComponent } from './MyComponents/employee-setup/employee-setup.component';
 import { EmployeeDetailsComponent } from './MyComponents/employee-details/employee-details.component';
 import { DetailModalComponent } from './MyComponents/employee-details/detail-modal/detail-modal.component';
-
 
 @NgModule({
   declarations: [
@@ -68,6 +70,9 @@ import { DetailModalComponent } from './MyComponents/employee-details/detail-mod
     MatTableModule,
     MatRadioModule,
     MatSelectModule,
+    MatDividerModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     AccountService,

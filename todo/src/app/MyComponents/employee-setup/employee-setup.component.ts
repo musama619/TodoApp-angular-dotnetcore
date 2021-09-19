@@ -20,15 +20,17 @@ export class EmployeeSetupComponent implements OnInit {
 
   setValue = 5;
   data: any;
+  employeeId: number;
 
   genderValue: any;
   typeValue: any;
-  deptValue: any;
+  public deptValue = new FormControl([]);
 
   constructor(
     private empService: EmployeeService,
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private employeeService: EmployeeService
   ) {
     this.setCities();
     this.setStates();
@@ -36,7 +38,11 @@ export class EmployeeSetupComponent implements OnInit {
     this.setDepartments();
     this.setDesignations();
 
+    this.setForm();
+  }
+  setForm() {
     this.employeeForm = new FormGroup({
+      id: new FormControl(null),
       employeeName: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
       departmentCode: new FormControl(this.departments),
@@ -50,56 +56,48 @@ export class EmployeeSetupComponent implements OnInit {
       phoneNumber: new FormControl(null, Validators.required),
       genderCode: new FormControl(null, Validators.required),
       typeCode: new FormControl(null),
+      status: new FormControl(true),
     });
   }
 
   ngOnInit() {
-
     this.data = this.userService.getEditEmployee();
-    console.log(this.data)
+
     if (this.data) {
+      this.employeeId = this.data.id;
+
       this.setFormValues(this.data);
     }
-
   }
 
-  setFormValues(data: any){
+  setFormValues(data: any) {
     this.employeeForm.setValue({
+      id: data.id,
       employeeName: data.employeeName,
       email: data.email,
-      departmentCode: data.departmentName,
-      designationCode: data.designationName,
+      departmentCode: data.departmentCode,
+      designationCode: data.designationCode,
       address: data.address,
       doj: data.doj,
-      dob:data.dob,
-      qualificationCode: data.qualificationName,
-      stateCode: data.stateName,
-      cityCode: data.cityName,
+      dob: data.dob,
+      qualificationCode: data.qualificationCode,
+      stateCode: data.stateCode,
+      cityCode: data.cityCode,
       phoneNumber: data.phoneNumber,
-      genderCode: data.genderName,
-      typeCode: data.typeName,
-    })
+      genderCode: data.genderCode,
+      typeCode: data.typeCode,
+      status: true,
+    });
 
-    if (data.genderName == 'Male') {
-      this.genderValue = "1";
-    }
-    else{
-      this.genderValue = "2";
-    }
-
-    if (data.typeName == 'Permenant') {
-      this.typeValue = "1";
-    }
-    else{
-      this.typeValue = "2";
-    }
-
-    this.deptValue = data.departmentName;
-    
+    this.genderValue = data.genderCode;
+    this.typeValue = data.typeCode;
   }
 
   submit() {
     let val = JSON.stringify(this.employeeForm.value);
+    this.employeeForm.removeControl('id'); 
+
+
     console.log('Setup: ' + val);
 
     this.empService.addEmployee(this.employeeForm.value).subscribe(
@@ -112,6 +110,22 @@ export class EmployeeSetupComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  updateEmployee() {
+    console.log('update' + this.employeeForm.value);
+    this.employeeService
+      .updateEmployee(this.employeeId, this.employeeForm.value)
+      .subscribe(
+        (response) => {
+          this.toastr.success('Employee Updated Successfully');
+          this.employeeForm.reset();
+          this.data = null;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   setCities() {

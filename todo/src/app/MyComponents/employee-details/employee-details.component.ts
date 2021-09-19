@@ -1,4 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Employee } from 'src/app/_models/Employee';
@@ -13,11 +16,18 @@ declare var $: any;
   templateUrl: './employee-details.component.html',
   styleUrls: ['./employee-details.component.css'],
 })
-export class EmployeeDetailsComponent implements OnInit {
-  @Output() toeditEmployee: EventEmitter<Employee> = new EventEmitter();
 
-  dataSource: any;
-  modelData: Employee;
+export class EmployeeDetailsComponent implements OnInit {
+
+  dataSource = new MatTableDataSource<Employee>();
+  modelData: any;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+
+  @Output() toEmployeeData: EventEmitter<any> = new EventEmitter();
+
+
 
   constructor(
     private empService: EmployeeService,
@@ -25,39 +35,44 @@ export class EmployeeDetailsComponent implements OnInit {
     private router: Router,
     private userService: UserService
   ) {
-    this.getData();
+    
   }
 
   displayedColumns: string[] = [
     'id',
-    'name',
-    'department',
-    'designation',
+    'employeeName',
+    'departmentName',
+    'designationName',
     'action',
   ];
   hide = true;
   users: any;
   sendModal: Employee;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getData();
+  }
 
+  // ngAfterViewInit() {
+  //   this.dataSource.sort = this.sort;
+  // }
   getData() {
-    this.empService.getEmployees().subscribe((response) => {
-      this.dataSource = response;
+    this.empService.getEmployees().subscribe((response: any) => {
+      this.dataSource = new MatTableDataSource(response);
       this.modelData = Object.assign(response);
+
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     });
   }
   editEmployee(model: any) {
     this.sendModal = model;
     console.log('inside' + JSON.stringify(model));
 
-    this.toeditEmployee.emit(model);
-
     this.userService.passEditeEmployeeData(model);
 
     this.router.navigate(['/employee-setup']);
 
-    //$('#exampleModal').modal('show');
   }
 
   deleteEmployee(model: Employee) {
@@ -93,5 +108,17 @@ export class EmployeeDetailsComponent implements OnInit {
         );
       }
     });
+  }
+
+  showModal(model: any){
+    $('#exampleModal').modal('show');
+  } 
+
+  applyFilter(filterValue: string) {
+
+    console.log(filterValue)
+    filterValue = filterValue.trim(); 
+    filterValue = filterValue.toLowerCase(); 
+    this.dataSource.filter = filterValue;
   }
 }
