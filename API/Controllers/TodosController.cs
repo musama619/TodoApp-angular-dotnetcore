@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using API.Data;
 using API.Models;
 using Microsoft.AspNetCore.Authorization;
+using API.Data;
 
 namespace API.Controllers
 {
