@@ -13,8 +13,12 @@ namespace Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            //Implementing the use of DI
+
+            //Scoped: One for life cycle of whole request
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+
 
             services.AddDbContext<DataContext>(options =>
             {
