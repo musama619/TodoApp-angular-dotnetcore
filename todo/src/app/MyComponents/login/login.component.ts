@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/_services/user.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -31,8 +32,11 @@ export class LoginComponent implements OnInit {
     this.accountService.login(this.loginForm.value).subscribe(
       (response) => {
         console.log('login Success' + response);
+
+        const decodedToken =  jwt_decode(JSON.stringify(response));
         localStorage.setItem('token', JSON.stringify(response));
 
+        console.log(decodedToken)
 
 
         this.router.navigate(['/employee-details']);
